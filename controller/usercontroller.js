@@ -376,7 +376,7 @@ const updategrade = async (req, res) => {
     }
 
     // Update the database
-    const result = await db.update('tblusers', updateData, `id='${userId}'`, true);
+    const result = await db.update('tblusers', {updateData}, `id='${userId}'`, true);
 
     // Handle the update response
     return handleUpdateResponse(result, res);
