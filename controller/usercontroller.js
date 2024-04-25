@@ -3,7 +3,9 @@ const bcrypt = require('bcrypt')
 const nodemailer = require('nodemailer');
 const jwt = require('jsonwebtoken')
 const transporter = nodemailer.createTransport({
-    service: "mail.deltawebservice.com",
+     host: "mail.deltawebservice.com",
+    port: 465,   
+    secure: false,
 
     auth: {
         user: "otp@deltawebservice.com",
