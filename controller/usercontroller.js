@@ -66,7 +66,7 @@ const otpSend = async(req, res) => {
         } else {
             // Email does not exist, generate OTP and insert new row
             const otp = generateOTP();
-            await db.insert('tblusers', { email, otp });
+            await db.insert('tblusers', { email, otp },true);
             await sendOTPByEmail(email, otp);
             return res.status(200).json({ message: 'OTP sent successfully. Please check your email' });
         }
