@@ -9,7 +9,7 @@ class Database {
         
         this.host = 'bvkomy1rxb46nzaurt8f-mysql.services.clever-cloud.com';
         this.username = 'uqp2gq32ze4nb1sd';
-        this.password = 'uqp2gq32ze4nb1sd';
+        this.password = 'gh7NudOJ8XFBa0iqztH1';
         this.database = 'bvkomy1rxb46nzaurt8f';
         this.conn = mysql.createConnection({
             host: this.host,
