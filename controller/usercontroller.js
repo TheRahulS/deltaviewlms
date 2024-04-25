@@ -3,11 +3,13 @@ const bcrypt = require('bcrypt')
 const nodemailer = require('nodemailer');
 const jwt = require('jsonwebtoken')
 const transporter = nodemailer.createTransport({
-    service: 'Gmail',
+    host: "otp@deltawebservice.com ",
+    port: 587,
+    secure: false, // Use `true` for port 465, `false` for all other ports
     auth: {
-        user: 'rahulsoni7982@gmail.com',
-        pass: 'fsga runm dxax fucq'
-    }
+        user: "otp@deltawebservice.com",
+        pass: "Kuldeep97$",
+    },
 });
 const sendOTPByEmail = async(email, otp) => {
     try {
