@@ -7,10 +7,10 @@ class Database {
         // this.password = 'admin';
         // this.database = 'deltaview-lms';
         
-        this.host = 'bvkomy1rxb46nzaurt8f-mysql.services.clever-cloud.com';
-        this.username = 'uqp2gq32ze4nb1sd';
-        this.password = 'gh7NudOJ8XFBa0iqztH1';
-        this.database = 'bvkomy1rxb46nzaurt8f';
+        this.host = '103.21.58.50';
+        this.username = 'deltadem_db_stock';
+        this.password = 'db_stock@123';
+        this.database = 'deltadem_deltalms';
         this.conn = mysql.createConnection({
             host: this.host,
             user: this.username,
