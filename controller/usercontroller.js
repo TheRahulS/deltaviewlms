@@ -9,10 +9,10 @@ const transporter = nodemailer.createTransport({
         pass: 'fsga runm dxax fucq'
     }
 });
-const sendOTPByEmail = async(email, otp='') => {
+const sendOTPByEmail = async(email, otp) => {
     try {
         const mailOptions = {
-            from: 'rahulsoni7982@gmail.com',
+            from: 'otp@deltawebservice.com',
             to: email,
             subject: 'Your OTP for verification',
             text: `Your OTP (One-Time Password) for verification is: ${otp}`
