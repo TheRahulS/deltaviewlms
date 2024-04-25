@@ -348,7 +348,8 @@ const selectlanguage = async(req, res) => {
         }
     }
     // update grade after login
-const updategrade = async (req, res) => {
+const updategrade = async(req, res) => {
+
     const userId = req.userId;
     const { grade } = req.body;
 
@@ -356,39 +357,34 @@ const updategrade = async (req, res) => {
     if (!userId) {
         return res.status(401).json({ message: 'User ID not found' });
     }
-
-    // Validate grade
     const isValidGrade = Number(grade) >= 1 && Number(grade) <= 12;
-
-    if (!isValidGrade) {
-        return res.status(400).json({ message: 'Choose a correct grade between 1 and 12' });
+        if (!isValidGrade) {
+            return res.status(400).json({ message: 'Choose a correct grade between 1 and 12' });
+        }
+        
+    if (parseInt(grade) >= 1 && parseInt(grade) <= 10) {
+        // Update the stream column to null or an empty string
+        const result = await db.update('tblusers', { grade, stream: "" }, `id='${userId}'`, true);
+        return handleUpdateResponse(result, res);
+    } else {
+        // If the grade is not within the range of 1 to 10, update only the grade
+        const result = await db.update('tblusers', { grade }, `id='${userId}'`, true);
+        return handleUpdateResponse(result, res);
     }
 
-    // Convert grade to integer
-    const gradeInt = parseInt(grade);
-
-    // Define update data
-    let updateData = { grade: gradeInt };
-
-    // If the grade is within the range of 1 to 10, update the stream column to null
-    if (gradeInt >= 1 && gradeInt <= 10) {
-        updateData.stream = null;
-    }
-
-    // Update the database
-    const result = await db.update('tblusers', {updateData}, `id='${userId}'`, true);
-
-    // Handle the update response
-    return handleUpdateResponse(result, res);
 };
 
+// Function to handle update response
 const handleUpdateResponse = (result, res) => {
-    // Handle the database update response
-    // Example:
-    if (result.success) {
-        return res.status(200).json({ message: 'Update successful' });
+    if (result.status) {
+        return res.status(200).json({
+            status: result.status,
+            affected_rows: result.affected_rows,
+            info: result.info,
+            message: "Data updated successfully"
+        });
     } else {
-        return res.status(500).json({ message: 'Update failed' });
+        throw new Error("Failed to update data");
     }
 };
 
