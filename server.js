@@ -5,15 +5,10 @@ const db = require('./config/db_Setting');
 const userRoute = require('./routes/userroutes');
 
 const cors = require('cors');
-const bodyParser = require('body-parser');
-
-
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cors({
-    origin : true, // change to false if you want to enable CORS for a specific origin
-}));
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(cors());
+
 
 
 
