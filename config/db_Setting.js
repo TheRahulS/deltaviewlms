@@ -4,13 +4,13 @@ class Database {
     constructor() {
         // this.host = 'localhost';
         // this.username = 'root';
-        // this.password = '';
+        // this.password = 'admin';
         // this.database = 'deltaview-lms';
+        
         this.host = 'bvkomy1rxb46nzaurt8f-mysql.services.clever-cloud.com';
         this.username = 'uqp2gq32ze4nb1sd';
         this.password = 'uqp2gq32ze4nb1sd';
         this.database = 'bvkomy1rxb46nzaurt8f';
-        
         this.conn = mysql.createConnection({
             host: this.host,
             user: this.username,
