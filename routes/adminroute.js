@@ -1,0 +1,13 @@
+const express = require('express')
+const adminroute = express.Router()
+const {AdminLogin,getAllUser,getAllNotSubscriptionUser,getAllSubscriptionUser,content,books,License,getProfile}=require('../controller/admincontroller')
+const {requireSignIn,isAdmin}=require('../middleware/adminauth')
+adminroute.post('/login',AdminLogin)
+adminroute.get('/all',requireSignIn,isAdmin,getAllUser)
+adminroute.get('/notsubs',requireSignIn,isAdmin,getAllNotSubscriptionUser)
+adminroute.get('/allsubs',requireSignIn,isAdmin,getAllSubscriptionUser)
+adminroute.post('/content',requireSignIn,isAdmin,content)
+adminroute.post('/books',requireSignIn,isAdmin,books)
+adminroute.get('/:id',requireSignIn,getProfile)
+adminroute.post('/license',requireSignIn,License)
+module.exports=adminroute
