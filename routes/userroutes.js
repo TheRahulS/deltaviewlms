@@ -1,6 +1,6 @@
 const express = require('express')
 const userRoute = express.Router()
-const { otpSend, verifyOtp, updateUser, getAllUser, selectclass, selectstream, resendOTP, updategrade, getsubject, getvideos, updatestream, selectboard, selectlanguage, loginController, getUserProfile, userProfile,updatesubscription,checkExpiredSubscriptions } = require('../controller/usercontroller')
+const { otpSend, verifyOtp, updateUser, getAllUser, selectclass, selectstream,deviceLicense, resendOTP, updategrade, getsubject, getvideos, updatestream, selectboard, selectlanguage, loginController, getUserProfile, userProfile,updatesubscription,checkExpiredSubscriptions } = require('../controller/usercontroller')
 const combinedMiddleware = require('../middleware/auth')
 userRoute.post('/sendotp', otpSend)
 userRoute.post('/verifyotp', verifyOtp)
@@ -11,7 +11,7 @@ userRoute.put('/userstream', combinedMiddleware, selectstream)
 userRoute.put('/resendotp',resendOTP)
 userRoute.post('/login', loginController)
 
-
+userRoute.put('/devicelicense',deviceLicense)
 userRoute.get('/userss', combinedMiddleware, getUserProfile);
 userRoute.put('/userprofile', combinedMiddleware, userProfile);
 userRoute.put('/board', combinedMiddleware, selectboard)
