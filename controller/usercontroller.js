@@ -451,11 +451,7 @@ const getsubject = async(req, res) => {
 
 const deviceLicense = async (req, res) => {
     const { appcode, deviceid, name, phone, state, city } = req.body;
-    if(!appcode || !deviceid || !name || !phone || !state || !city){
-    //     res.json(400).json({
-    //         message:"all fields are required"
-    //     })
-    // }
+  
     const validDevice = await db.select('tbl_device_license', '*', `appcode='${appcode}' AND deviceid='${deviceid}' AND name!=''`, true);
     if (validDevice) {
         return res.status(400).json({
