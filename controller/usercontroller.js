@@ -447,6 +447,35 @@ const getsubject = async(req, res) => {
     });
 
 };
+
+
+const deviceLicense = async (req, res) => {
+    const { appcode, deviceid, name, phone, state, city } = req.body;
+    if(!appcode || !deviceid || !name || !phone || !state || !city){
+        res.json(400).json({
+            message:"all fields are required"
+        })
+    }
+    const validDevice = await db.select('tbl_device_license', '*', `appcode='${appcode}' AND deviceid='${deviceid}' AND name!=''`, true);
+    if (validDevice) {
+        return res.status(400).json({
+            status:false,
+            message: "already exist"
+        });
+    }
+    try {
+        await db.update('tbl_device_license', { name, phone, state, city,deviceid,isactivated:'1' }, `appcode='${appcode}'`,true);
+        return res.status(200).json({
+            status:true,
+            message: "Device license updated successfully"
+        });
+    } catch (error) {
+        console.error('Error updating device license:', error);
+        return res.status(500).json({
+            message: "Internal server error"
+        });
+    }
+}
 // get videos of particular subject
 const getvideos = async (req, res) => {
     const userId = req.userId;
@@ -617,4 +646,4 @@ const checkExpiredSubscriptions = async (req, res) => {
     }
 };
 
-module.exports = { otpSend, verifyOtp, updateUser, getAllUser, selectclass, updatestream, selectstream, loginController, getUserProfile, userProfile, getsubject, selectboard, getvideos, selectlanguage, updategrade,updatesubscription,checkExpiredSubscriptions,resendOTP }
+module.exports = { otpSend, verifyOtp, updateUser, getAllUser, selectclass, updatestream, selectstream, loginController, getUserProfile, userProfile, getsubject, selectboard, getvideos, selectlanguage, updategrade,updatesubscription,checkExpiredSubscriptions,resendOTP,deviceLicense }
