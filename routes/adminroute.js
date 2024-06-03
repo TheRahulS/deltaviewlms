@@ -9,5 +9,5 @@ adminroute.get('/allsubs',requireSignIn,isAdmin,getAllSubscriptionUser)
 adminroute.post('/content',requireSignIn,isAdmin,content)
 adminroute.post('/books',requireSignIn,isAdmin,books)
 adminroute.get('/:id',requireSignIn,getProfile)
-adminroute.post('/license',requireSignIn,License)
+adminroute.post('/license',License)
 module.exports=adminroute
