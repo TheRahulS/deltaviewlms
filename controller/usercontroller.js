@@ -450,28 +450,56 @@ const getsubject = async(req, res) => {
 
 
 const deviceLicense = async (req, res) => {
-    const { appcode, deviceid, name, phone, state, city } = req.body;
-  
-    const validDevice = await db.select('tbl_device_license', '*', `appcode='${appcode}' AND deviceid='${deviceid}' AND name!=''`, true);
-    if (validDevice) {
-        return res.status(400).json({
-            status:false,
-            message: "already exist"
-        });
-    }
+    const { appcode, deviceid } = req.body;
     try {
-        await db.update('tbl_device_license', { name, phone, state, city,deviceid,isactivated:'1' }, `appcode='${appcode}'`,true);
+        // Check if the appcode exists
+        const existingAppcode = await db.select('tbl_device_license', '*', `appcode='${appcode}'`, true);
+        if (!existingAppcode) {
+            return res.status(400).json({
+                status: false,
+                message: "License is not valid"
+            });
+        }
+
+        const userdeviceid = existingAppcode.deviceid;
+
+        // Check if the provided deviceid matches the one in the database
+        if (userdeviceid && deviceid !== userdeviceid) {
+            return res.status(400).json({
+                status: false,
+                message: "License already consumed"
+            });
+        }
+
+        // Only update if deviceid is provided and not empty
+        if (deviceid) {
+            const existingDevice = await db.select('tbl_device_license', '*', `deviceid='${deviceid}'`, true);
+            if (existingDevice) {
+                return res.status(400).json({
+                    status: false,
+                    message: "Device ID already exists"
+                });
+            }
+            await db.update('tbl_device_license', { deviceid }, `appcode='${appcode}'`, true);
+        } else {
+            return res.status(400).json({
+                status: false,
+                message: "Device ID is required"
+            });
+        }
+
         return res.status(200).json({
-            status:true,
+            status: "success",
             message: "Device license updated successfully"
         });
+
     } catch (error) {
         console.error('Error updating device license:', error);
         return res.status(500).json({
             message: "Internal server error"
         });
     }
-}
+};
 // get videos of particular subject
 const getvideos = async (req, res) => {
     const userId = req.userId;
