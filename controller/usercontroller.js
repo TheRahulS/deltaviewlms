@@ -500,6 +500,48 @@ const deviceLicense = async (req, res) => {
         });
     }
 };
+
+
+const licenseProfile = async (req, res) => {
+    const appcode = req.params.id;
+    const { name, phone, state, city } = req.body;
+
+    try {
+        // Check if the appcode exists
+        const existingAppcode = await db.select('tbl_device_license', '*', `appcode='${appcode}'`, true);
+        if (!existingAppcode) {
+            return res.status(400).json({
+                status: false,
+                message: "License is not valid"
+            });
+        }
+
+        // Check if any of the required fields are empty
+        if (!name || !phone || !state || !city ) {
+            return res.status(400).json({
+                status: false,
+                message: "all fields are required"
+            });
+        }
+       
+
+
+        // Update the fields in the database
+        const updateFields = { name, phone, state, city,isactivated:"1" };
+        await db.update('tbl_device_license', updateFields, `appcode='${appcode}'`, true);
+
+        return res.status(200).json({
+            status: true,
+            message: "Profile updated successfully"
+        });
+
+    } catch (error) {
+        console.error('Error updating profile:', error);
+        return res.status(500).json({
+            message: "Internal server error"
+        });
+    }
+};
 // get videos of particular subject
 const getvideos = async (req, res) => {
     const userId = req.userId;
@@ -670,4 +712,4 @@ const checkExpiredSubscriptions = async (req, res) => {
     }
 };
 
-module.exports = { otpSend, verifyOtp, updateUser, getAllUser, selectclass, updatestream, selectstream, loginController, getUserProfile, userProfile, getsubject, selectboard, getvideos, selectlanguage, updategrade,updatesubscription,checkExpiredSubscriptions,resendOTP,deviceLicense }
+module.exports = { otpSend, verifyOtp, updateUser, getAllUser, selectclass, updatestream, selectstream, loginController, getUserProfile, userProfile, getsubject, selectboard, getvideos, selectlanguage, updategrade,updatesubscription,checkExpiredSubscriptions,resendOTP,deviceLicense,licenseProfile }
