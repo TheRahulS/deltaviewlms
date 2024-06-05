@@ -462,7 +462,6 @@ const deviceLicense = async (req, res) => {
         }
 
         const userdeviceid = existingAppcode.deviceid;
-
         if (userdeviceid && deviceid !== userdeviceid) {
             return res.status(400).json({
                 status: false,
@@ -474,8 +473,8 @@ const deviceLicense = async (req, res) => {
         if (deviceid) {
             const existingDevice = await db.select('tbl_device_license', '*', `deviceid='${deviceid}'`, true);
             if (existingDevice) {
-                return res.status(400).json({
-                    status: false,
+                return res.status(200).json({
+                    status: "success",
                     message: "Device ID already exists"
                 });
             }
