@@ -514,23 +514,9 @@ const licenseProfile = async (req, res) => {
             });
         }
 
-        const licenseData = await db.select('tbl_license', '*', `appcode='${appcode}'`, true);
-        if (!licenseData) {
-            return res.status(400).json({
-                status: false,
-                message: "License duration not found"
-            });
-        }
-        const duration = licenseData.duration;
-        console.log(duration)
-        let Time_Period = existingAppcode.Time_Period;
-        console.log(Time_Period)
-        if (Time_Period === '' || Time_Period === undefined) {
-            Time_Period = duration;
-            
-        }
+        
 
-        // Check if any of the required fields are empty
+      
         if (!name || !phone || !state || !city) {
             return res.status(400).json({
                 status: false,
@@ -538,10 +524,9 @@ const licenseProfile = async (req, res) => {
             });
         }
         const data=await db.select('tbl_app','*',`appcode='${appcode}'`, true);
-        let isactivated = Time_Period > 0 ? "1" : "0";
-        console.log(isactivated)
+        
 
-        const updateFields = { name, phone, state, city, isactivated, Time_Period };
+        const updateFields = { name, phone, state, city, isactivated:"1" };
         await db.update('tbl_device_license', updateFields, `appcode='${appcode}'`, true);
 
         return res.status(200).json({
