@@ -96,7 +96,7 @@ function generateRandomCode() {
     const randomCode = `DV${year}${date}${hour}${minute}${second}`;
     return randomCode;
 }
-async function updateLicenseCode(id) {
+async function updateLicenseCode(id,duration) {
     const randomCode = generateRandomCode();
     await db.update('tbl_license', { appcode: randomCode }, `id=${id}`);
     await db.insert('tbl_device_license',{appcode:randomCode,license_id:id})
@@ -116,7 +116,7 @@ const License = async (req, res) => {
             const insertResult = await db.insert('tbl_license', { name, phoneno, email, organisation, content, board, medium, duration }, true);
             if (insertResult.status && insertResult.insert_id) {
                 const lastInsertedId = insertResult.insert_id;
-                await updateLicenseCode(lastInsertedId);
+                await updateLicenseCode(lastInsertedId,duration);
                 return res.status(200).json({ message: 'License created successfully', lastInsertedId });
             } else {
                 return res.status(500).json({ message: 'Error inserting license' });
