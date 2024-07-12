@@ -523,12 +523,12 @@ const licenseProfile = async (req, res) => {
                 message: "All fields are required"
             });
         }
-        const data=await db.select('tbl_app','*',`appcode='${appcode}'`, true);
+       
         
 
         const updateFields = { name, phone, state, city, isactivated:"1" };
         await db.update('tbl_device_license', updateFields, `appcode='${appcode}'`, true);
-
+         const data=await db.select('tbl_app','*',`appcode='${appcode}'`, true);
         return res.status(200).json({
             status: true,
             message: "Profile updated successfully",
