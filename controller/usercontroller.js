@@ -529,10 +529,12 @@ const licenseProfile = async (req, res) => {
         const updateFields = { name, phone, state, city, isactivated:"1" };
         await db.update('tbl_device_license', updateFields, `appcode='${appcode}'`, true);
          const data=await db.select('tbl_app','*',`appcode='${appcode}'`, true);
+        const result=await db.select('tbl_license','*',`appcode='${appcode}'`)
         return res.status(200).json({
             status: true,
             message: "Profile updated successfully",
-            data:data
+            data:data,
+            result:result
 
 
         });
