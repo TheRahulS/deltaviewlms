@@ -62,13 +62,16 @@ const login = async (req, res) => {
         const token = jwt.sign(payload, secretKey, { expiresIn: '1h' });
         const data= await db.select('tbl_devices_license',"*",`appcode='${appcode}'`,true)
         const time = data.Time_Period;
+         const userData=await db.select('tbl_license','*',`appcode='${appcode}'`,true);
+         console.log(userData)
         console.log(data)
         return res.status(200).json({
             status: true,
             message: "Device license updated successfully",
             token: token, // Send the token in the response,
             data:payload,
-            timedata:time
+            timedata:time,
+             userData:userData
             
         });
 
