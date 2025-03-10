@@ -62,7 +62,7 @@ const login = async (req, res) => {
         const token = jwt.sign(payload, secretKey, { expiresIn: '1h' });
         const data= await db.select('tbl_devices_license',"*",`appcode='${appcode}'`,true)
         const time = data.Time_Period;
-         const userData=await db.select('tbl_license','*',`appcode='${appcode}'`,true);
+         const userData=await db.select('tbl_window_license','*',`appcode='${appcode}'`,true);
          console.log(userData)
         console.log(data)
         return res.status(200).json({
