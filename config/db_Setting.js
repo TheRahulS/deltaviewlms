@@ -8,9 +8,9 @@ class Database {
         // this.database = 'deltaview-lms';
         
         this.host = 'www.deltawebservice.com';
-        this.username = 'dwebserv_dwlms';
-        this.password = 'Rahul@7982';
-        this.database = 'dwebserv_deltalms';
+        this.username = 'dwebserv_root';
+        this.password = 'Kuldeep97$';
+        this.database = 'dwebserv_api';
         this.conn = mysql.createConnection({
             host: this.host,
             user: this.username,
