@@ -7,7 +7,7 @@ class Database {
         // this.password = 'admin';
         // this.database = 'deltaview-lms';
         
-        this.host = 'localhost';
+        this.host = 'https://www.deltawebservice.com';
         this.username = 'dwebserv_dwlms';
         this.password = 'Rahul@7982';
         this.database = 'dwebserv_deltalms';
