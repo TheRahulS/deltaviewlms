@@ -7,10 +7,10 @@ class Database {
         // this.password = 'admin';
         // this.database = 'deltaview-lms';
         
-        this.host = 'https://www.deltawebservice.com';
-        this.username = 'dwebserv_dwlms';
-        this.password = 'Rahul@7982';
-        this.database = 'dwebserv_deltalms';
+        this.host = 'https://deltaitnetwork.co.in';
+        this.username = 'deltaitc_DeltaViewLearn';
+        this.password = 'Kuldeep97$';
+        this.database = 'deltaitc_DeltaLearnAPI';
         this.conn = mysql.createConnection({
             host: this.host,
             user: this.username,
