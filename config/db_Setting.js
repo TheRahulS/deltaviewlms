@@ -15,7 +15,9 @@ class Database {
             host: this.host,
             user: this.username,
             password: this.password,
-            database: this.database
+            database: this.database,
+            connectTimeout: 60000, // 60 seconds (default is 10 seconds)
+            acquireTimeout: 60000, // 60 seconds for acquiring a connection
         });
 
         this.connect();
@@ -24,7 +26,8 @@ class Database {
     connect() {
         this.conn.connect((err) => {
             if (err) {
-                console.error('Database Connectivity Error:', err);
+                // console.error('Database Connectivity Error:', err);
+                console.log(err);
                 return;
             }
             console.log('Connected to database successfully!');
