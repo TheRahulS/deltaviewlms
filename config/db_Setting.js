@@ -8,16 +8,16 @@ class Database {
         // this.database = 'deltaview-lms';
         
         this.host = 'www.deltawebservice.com';
-        this.username = 'dwebserv_root';
-        this.password = 'Kuldeep97$';
-        this.database = 'dwebserv_api';
+        this.username = 'dwebserv_dwlms';
+        this.password = 'Rahul@7982';
+        this.database = 'dwebserv_deltalms';
         this.conn = mysql.createConnection({
             host: this.host,
             user: this.username,
             password: this.password,
-            database: this.database,
-            connectTimeout: 60000, // 60 seconds (default is 10 seconds)
-            acquireTimeout: 60000, // 60 seconds for acquiring a connection
+            database: this.database
+            // connectTimeout: 60000, // 60 seconds (default is 10 seconds)
+            // acquireTimeout: 60000, // 60 seconds for acquiring a connection
         });
 
         this.connect();
