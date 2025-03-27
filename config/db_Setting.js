@@ -7,7 +7,7 @@ class Database {
         // this.password = 'admin';
         // this.database = 'deltaview-lms';
         
-        this.host = 'https://deltaitnetwork.co.in';
+        this.host = 'www.deltaitnetwork.co.in';
         this.username = 'deltaitc_DeltaViewLearn';
         this.password = 'Kuldeep97$';
         this.database = 'deltaitc_DeltaLearnAPI';
