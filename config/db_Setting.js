@@ -7,17 +7,18 @@ class Database {
         // this.password = 'admin';
         // this.database = 'deltaview-lms';
         
-        this.host = 'www.deltaitnetwork.co.in';
-        this.username = 'deltaitc_DeltaViewLearn';
-        this.password = 'Kuldeep97$';
-        this.database = 'deltaitc_DeltaLearnAPI';
+        this.host = 'www.deltawebservice.com';
+       this.username = 'dwebserv_dwlms';
+        this.password = 'Rahul@7982';
+        this.database = 'dwebserv_deltalms';
         this.conn = mysql.createConnection({
             host: this.host,
+            port:3306,
             user: this.username,
             password: this.password,
-            database: this.database
-            // connectTimeout: 60000, // 60 seconds (default is 10 seconds)
-            // acquireTimeout: 60000, // 60 seconds for acquiring a connection
+            database: this.database,
+           connectTimeout: 60000,
+            acquireTimeout: 60000,// 60 seconds for acquiring a connection
         });
 
         this.connect();
